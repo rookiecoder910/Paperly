@@ -37,8 +37,12 @@ export default function SignupPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center px-4 bg-muted/30">
-            <Card className="w-full max-w-md shadow-xl">
+        <div className="relative flex min-h-screen items-center justify-center px-4">
+            {/* Background glow */}
+            <div className="pointer-events-none absolute inset-0">
+                <div className="absolute left-1/2 top-1/3 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-gradient-to-r from-indigo-500/15 to-violet-600/15 blur-[100px]" />
+            </div>
+            <Card className="relative w-full max-w-md border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-xl">
                 <CardHeader className="items-center text-center">
                     <Link href="/" className="mb-4 flex items-center gap-2">
                         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-white">
