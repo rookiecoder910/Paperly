@@ -15,7 +15,7 @@ export function StatsSection() {
       {/* Subtle background */}
       <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 via-transparent to-violet-500/5" />
 
-      <Stagger className="relative mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-10 px-4 py-14 sm:gap-20">
+      <Stagger className="relative mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-6 px-4 py-10 sm:gap-10 sm:py-14 md:gap-20">
         {stats.map((s) => (
           <StaggerItem key={s.label}>
             <div className="flex items-center gap-4">

@@ -31,7 +31,7 @@ function FeatureBlock({
 
   return (
     <div
-      className={`flex flex-col items-center gap-12 lg:flex-row ${
+      className={`flex flex-col items-center gap-8 sm:gap-12 lg:flex-row ${
         isLeft ? "lg:flex-row" : "lg:flex-row-reverse"
       }`}
     >
@@ -43,12 +43,12 @@ function FeatureBlock({
       >
         <ScaleOnScroll>
           <div
-            className={`relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br ${gradient} p-px`}
+            className={`relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br sm:rounded-3xl ${gradient} p-px`}
           >
-            <div className="rounded-3xl bg-background/80 p-8 backdrop-blur-xl sm:p-12">
+            <div className="rounded-2xl bg-background/80 p-6 backdrop-blur-xl sm:rounded-3xl sm:p-8 md:p-12">
               <div className="flex flex-col items-center gap-6 text-center">
                 <div
-                  className={`flex h-20 w-20 items-center justify-center rounded-2xl ${iconBg}`}
+                  className={`flex h-16 w-16 items-center justify-center rounded-xl sm:h-20 sm:w-20 sm:rounded-2xl ${iconBg}`}
                 >
                   {icon}
                 </div>
@@ -67,19 +67,19 @@ function FeatureBlock({
 
       {/* Text content */}
       <FadeIn direction={isLeft ? "right" : "left"} delay={delay + 0.15} className="flex-1">
-        <div className="max-w-lg">
+        <div className="max-w-lg text-center lg:text-left">
           <span className="mb-4 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-indigo-400">
             {badge}
           </span>
-          <h3 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h3 className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
             {title}
           </h3>
-          <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
+          <p className="mb-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
             {description}
           </p>
           <ul className="space-y-3">
             {highlights.map((h) => (
-              <li key={h} className="flex items-center gap-3 text-sm text-muted-foreground">
+              <li key={h} className="flex items-center justify-center gap-3 text-sm text-muted-foreground lg:justify-start">
                 <ArrowRight className="h-4 w-4 flex-shrink-0 text-indigo-400" />
                 {h}
               </li>
@@ -93,13 +93,13 @@ function FeatureBlock({
 
 export function FeaturesSection() {
   return (
-    <section className="relative mx-auto w-full max-w-6xl px-4 py-32">
+    <section className="relative mx-auto w-full max-w-6xl px-4 py-16 sm:py-24 lg:py-32">
       {/* Section title */}
-      <FadeIn className="mb-24 text-center">
+      <FadeIn className="mb-12 text-center sm:mb-16 lg:mb-24">
         <span className="mb-4 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-indigo-400">
           Features
         </span>
-        <h2 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
+        <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
           Everything You Need
         </h2>
         <p className="mx-auto max-w-xl text-lg text-muted-foreground">
@@ -108,7 +108,7 @@ export function FeaturesSection() {
         </p>
       </FadeIn>
 
-      <div className="space-y-40">
+      <div className="space-y-20 sm:space-y-28 lg:space-y-40">
         {/* Feature 1: OCR */}
         <FeatureBlock
           icon={<ScanText className="h-10 w-10 text-indigo-400" />}

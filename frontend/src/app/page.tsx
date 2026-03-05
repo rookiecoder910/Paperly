@@ -7,7 +7,7 @@ import { Footer } from "@/components/landing/footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
       <Navbar />
       <HeroSection />
       <StatsSection />

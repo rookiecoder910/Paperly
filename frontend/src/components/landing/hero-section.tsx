@@ -8,11 +8,11 @@ import { ArrowRight, ScanText, PenLine, FileDown } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative flex min-h-[100vh] flex-col items-center justify-center overflow-hidden px-4 pt-24 pb-32">
+    <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-16 sm:pt-24 sm:pb-32">
       {/* Background effects */}
       <div className="pointer-events-none absolute inset-0">
         {/* Radial glow */}
-        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-indigo-500/20 to-violet-600/20 blur-[120px]" />
+        <div className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-indigo-500/20 to-violet-600/20 blur-[80px] sm:h-[600px] sm:w-[600px] sm:blur-[120px]" />
         {/* Grid overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,.04)_1px,transparent_1px)] bg-[size:80px_80px]" />
         {/* Gradient fade at bottom */}
@@ -28,7 +28,7 @@ export function HeroSection() {
       </Floating>
 
       {/* Content */}
-      <div className="relative z-10 flex max-w-4xl flex-col items-center gap-8">
+      <div className="relative z-10 flex w-full max-w-4xl flex-col items-center gap-5 sm:gap-8">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,7 +46,7 @@ export function HeroSection() {
 
         {/* Headline */}
         <motion.h1
-          className="text-center text-5xl font-extrabold leading-tight tracking-tight sm:text-6xl lg:text-7xl"
+          className="text-center text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
@@ -60,7 +60,7 @@ export function HeroSection() {
 
         {/* Subheading */}
         <motion.p
-          className="max-w-2xl text-center text-lg leading-relaxed text-muted-foreground sm:text-xl"
+          className="max-w-2xl text-center text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
@@ -80,7 +80,7 @@ export function HeroSection() {
           <Button
             asChild
             size="lg"
-            className="group gap-2 rounded-full bg-gradient-to-r from-indigo-500 to-violet-600 px-8 py-6 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-xl hover:shadow-indigo-500/30 hover:from-indigo-600 hover:to-violet-700"
+            className="group gap-2 rounded-full bg-gradient-to-r from-indigo-500 to-violet-600 px-6 py-5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-xl hover:shadow-indigo-500/30 hover:from-indigo-600 hover:to-violet-700 sm:px-8 sm:py-6 sm:text-base"
           >
             <Link href="/signup">
               Start Using Paperly
@@ -91,7 +91,7 @@ export function HeroSection() {
             variant="outline"
             size="lg"
             asChild
-            className="rounded-full border-white/10 bg-white/5 px-8 py-6 text-base backdrop-blur-sm hover:bg-white/10"
+            className="rounded-full border-white/10 bg-white/5 px-6 py-5 text-sm backdrop-blur-sm hover:bg-white/10 sm:px-8 sm:py-6 sm:text-base"
           >
             <Link href="/login">Log In</Link>
           </Button>
@@ -99,24 +99,24 @@ export function HeroSection() {
 
         {/* Floating mini-cards preview */}
         <motion.div
-          className="mt-12 flex items-center gap-6"
+          className="mt-8 flex items-center gap-4 sm:mt-12 sm:gap-6"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
         >
           <Floating amplitude={8} duration={3.5}>
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-md sm:h-20 sm:w-20">
-              <ScanText className="h-7 w-7 text-indigo-400 sm:h-8 sm:w-8" />
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-md sm:h-20 sm:w-20 sm:rounded-2xl">
+              <ScanText className="h-6 w-6 text-indigo-400 sm:h-8 sm:w-8" />
             </div>
           </Floating>
           <Floating amplitude={10} duration={4}>
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-md sm:h-20 sm:w-20">
-              <PenLine className="h-7 w-7 text-violet-400 sm:h-8 sm:w-8" />
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-md sm:h-20 sm:w-20 sm:rounded-2xl">
+              <PenLine className="h-6 w-6 text-violet-400 sm:h-8 sm:w-8" />
             </div>
           </Floating>
           <Floating amplitude={6} duration={4.5}>
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-md sm:h-20 sm:w-20">
-              <FileDown className="h-7 w-7 text-purple-400 sm:h-8 sm:w-8" />
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-md sm:h-20 sm:w-20 sm:rounded-2xl">
+              <FileDown className="h-6 w-6 text-purple-400 sm:h-8 sm:w-8" />
             </div>
           </Floating>
         </motion.div>
@@ -124,7 +124,7 @@ export function HeroSection() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 sm:bottom-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
