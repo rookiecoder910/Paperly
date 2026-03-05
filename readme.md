@@ -15,6 +15,8 @@
 
 *Transform uploaded images into clean digital text and generate realistic handwritten-style notes with AI.*
 
+**[🚀 View Deployed Application](https://frontend-ten-iota-59.vercel.app/)**
+
 </div>
 
 ---
@@ -98,7 +100,7 @@ sequenceDiagram
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/paperly.git
+git clone https://github.com/rookiecoder910/paperly.git
 cd paperly
 ```
 
@@ -149,6 +151,8 @@ python app.py
 | `GET` | `/api/health` | Health check |
 | `POST` | `/api/ocr` | Upload image and extract text |
 | `POST` | `/api/generate` | Generate handwritten note image |
+| `POST` | `/api/auth/login` | User login (To be implemented) |
+| `POST` | `/api/auth/signup`| User registration (To be implemented) |
 
 ### AI Service Endpoints
 
@@ -156,6 +160,19 @@ python app.py
 |--------|----------|-------------|
 | `POST` | `/ocr` | Extract text from image |
 | `POST` | `/generate-handwriting` | Convert text to handwritten image |
+
+---
+
+## 🧭 Frontend Routes
+
+The Next.js application contains the following routes. You can use this structure to guide the development of your Spring Boot REST Controllers, especially for user authentication, API integrations, and route protection logic in the backend.
+
+| Route | Page | Description |
+|-------|------|-------------|
+| `/` | Landing Page | Landing page displaying product features, statistics, and how it works. |
+| `/login` | Login Form | User authentication login page. |
+| `/signup`| Registration | New user account creation page. |
+| `/dashboard` | Main App | Protected core application area for uploading images, OCR text editing, and handwriting generation. |
 
 ---
 
