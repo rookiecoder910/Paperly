@@ -129,6 +129,9 @@
 
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
 
@@ -174,7 +177,19 @@ html.lenis body {
   color: inherit;
 }
 
-/* ─── Custom animations ─── */
+/* ─── Reduced motion: disable ALL custom animations ─── */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Custom animations (GPU-composited with transform3d) ─── */
 @keyframes gradient-shift {
 
   0%,
@@ -192,22 +207,20 @@ html.lenis body {
   0%,
   100% {
     opacity: 0.4;
-    transform: scale(1);
   }
 
   50% {
-    opacity: 0.8;
-    transform: scale(1.05);
+    opacity: 0.7;
   }
 }
 
 @keyframes shimmer {
   0% {
-    transform: translateX(-100%);
+    transform: translate3d(-100%, 0, 0);
   }
 
   100% {
-    transform: translateX(100%);
+    transform: translate3d(100%, 0, 0);
   }
 }
 
@@ -215,11 +228,11 @@ html.lenis body {
 
   0%,
   100% {
-    transform: translateY(0px);
+    transform: translate3d(0, 0, 0);
   }
 
   50% {
-    transform: translateY(-20px);
+    transform: translate3d(0, -16px, 0);
   }
 }
 
@@ -230,43 +243,70 @@ html.lenis body {
 
 .animate-glow-pulse {
   animation: glow-pulse 4s ease-in-out infinite;
+  will-change: opacity;
 }
 
 .animate-shimmer {
   animation: shimmer 2.5s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-float-slow {
   animation: float-slow 6s ease-in-out infinite;
+  will-change: transform;
 }
 
-/* ─── Noise texture overlay ─── */
+/* ─── Noise texture overlay (hidden on mobile for perf) ─── */
 .noise-overlay::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
+}
+
+/* Remove noise on mobile — SVG filters thrash mobile GPUs */
+@media (max-width: 767px) {
+  .noise-overlay::before {
+    display: none;
+  }
 }
 
 /* ─── Gradient mesh background ─── */
 .gradient-mesh {
   background:
     radial-gradient(ellipse 80% 60% at 20% 40%,
-      rgba(99, 102, 241, 0.12) 0%,
+      rgba(99, 102, 241, 0.1) 0%,
       transparent 70%),
     radial-gradient(ellipse 60% 80% at 80% 20%,
-      rgba(139, 92, 246, 0.1) 0%,
+      rgba(139, 92, 246, 0.08) 0%,
       transparent 70%),
     radial-gradient(ellipse 70% 50% at 60% 80%,
-      rgba(168, 85, 247, 0.08) 0%,
+      rgba(168, 85, 247, 0.06) 0%,
       transparent 70%);
 }
 
-/* ─── Glass card utility ─── */
+/* ─── Glass card utility (lighter blur on mobile) ─── */
 .glass-card {
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 767px) {
+  .glass-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* ─── Touch device optimizations ─── */
+@media (hover: none) and (pointer: coarse) {
+
+  /* Disable hover effects on touch devices */
+  .group:hover .group-hover\:scale-105 {
+    transform: none;
+  }
 }

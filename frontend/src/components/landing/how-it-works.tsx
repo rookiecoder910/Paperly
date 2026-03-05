@@ -32,52 +32,51 @@ const steps = [
 
 export function HowItWorks() {
     return (
-        <section className="relative mx-auto w-full max-w-6xl px-4 py-20 sm:py-28 lg:py-36">
+        <section className="relative mx-auto w-full max-w-6xl px-4 py-16 sm:py-24 lg:py-36">
             {/* Section header */}
-            <FadeIn className="mb-14 text-center sm:mb-20">
-                <span className="mb-4 inline-block rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-violet-400">
+            <FadeIn className="mb-10 text-center sm:mb-16 lg:mb-20">
+                <span className="mb-3 inline-block rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-violet-400 sm:mb-4 sm:px-4 sm:text-xs">
                     How It Works
                 </span>
-                <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
                     Three Simple Steps
                 </h2>
-                <p className="mx-auto max-w-xl text-lg text-muted-foreground">
+                <p className="mx-auto max-w-xl text-sm text-muted-foreground sm:text-base md:text-lg">
                     From upload to download in under 30 seconds. No complicated setup required.
                 </p>
             </FadeIn>
 
             {/* Steps */}
-            <Stagger className="relative grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6 lg:gap-10" staggerDelay={0.15}>
-                {/* Connecting line (desktop) */}
+            <Stagger className="relative grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:gap-10" staggerDelay={0.12}>
+                {/* Connecting line (desktop only) */}
                 <div className="pointer-events-none absolute top-1/2 left-[16.67%] right-[16.67%] hidden -translate-y-1/2 md:block">
                     <div className="h-px w-full bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20" />
-                    {/* Glowing dots on the line */}
-                    <div className="absolute left-0 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-400 shadow-lg shadow-indigo-400/50" />
-                    <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-400 shadow-lg shadow-violet-400/50" />
-                    <div className="absolute right-0 top-1/2 h-2 w-2 translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-400 shadow-lg shadow-purple-400/50" />
+                    <div className="absolute left-0 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-400 shadow-md shadow-indigo-400/40" />
+                    <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-400 shadow-md shadow-violet-400/40" />
+                    <div className="absolute right-0 top-1/2 h-2 w-2 translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-400 shadow-md shadow-purple-400/40" />
                 </div>
 
                 {steps.map((step, i) => (
                     <StaggerItem key={step.title}>
                         <GradientBorder
-                            className="p-6 sm:p-8 text-center h-full"
+                            className="p-5 sm:p-6 md:p-8 text-center h-full"
                             borderClassName={`bg-gradient-to-br ${step.glow}`}
                         >
                             {/* Step number */}
-                            <div className="mb-5 inline-flex items-center justify-center">
-                                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/[0.06] text-xs font-bold text-muted-foreground">
+                            <div className="mb-4 inline-flex items-center justify-center sm:mb-5">
+                                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/[0.06] text-[10px] font-bold text-muted-foreground sm:h-8 sm:w-8 sm:text-xs">
                                     {i + 1}
                                 </span>
                             </div>
 
                             {/* Icon */}
-                            <div className={`mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-xl ${step.iconBg} border border-white/10`}>
-                                <step.icon className={`h-7 w-7 ${step.color}`} />
+                            <div className={`mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${step.iconBg} border border-white/10 sm:mb-5 sm:h-14 sm:w-14 sm:rounded-xl`}>
+                                <step.icon className={`h-6 w-6 ${step.color} sm:h-7 sm:w-7`} />
                             </div>
 
                             {/* Text */}
-                            <h3 className="mb-3 text-xl font-bold">{step.title}</h3>
-                            <p className="text-sm leading-relaxed text-muted-foreground">
+                            <h3 className="mb-2 text-lg font-bold sm:mb-3 sm:text-xl">{step.title}</h3>
+                            <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                                 {step.description}
                             </p>
                         </GradientBorder>
