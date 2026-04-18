@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback, type DragEvent, type ChangeEvent } from "react";
 import { CloudUpload, Loader2, ScanText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { apiExtractText } from "@/lib/api";
 
 export function OcrSidebar() {
     const [file, setFile] = useState<File | null>(null);
@@ -40,23 +41,24 @@ export function OcrSidebar() {
     const handleExtract = async () => {
         if (!file) return;
         setIsProcessing(true);
-        setProgress(0);
+        setProgress(10);
 
         try {
-            const Tesseract = (await import("tesseract.js")).default;
-            const result = await Tesseract.recognize(file, "eng", {
-                logger: (m) => {
-                    if (m.status === "recognizing text" && typeof m.progress === "number") {
-                        setProgress(Math.round(m.progress * 100));
-                    }
-                },
-            });
-            setExtractedText(result.data.text);
-        } catch {
-            setExtractedText("Error extracting text. Please try another image.");
+            // Simulate progress while API processes
+            const progressInterval = setInterval(() => {
+                setProgress((prev) => Math.min(prev + 8, 90));
+            }, 300);
+
+            const result = await apiExtractText(file);
+
+            clearInterval(progressInterval);
+            setProgress(100);
+            setExtractedText(result.text);
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "OCR failed";
+            setExtractedText(`Error: ${message}`);
         } finally {
             setIsProcessing(false);
-            setProgress(100);
         }
     };
 

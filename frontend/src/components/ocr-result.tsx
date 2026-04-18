@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScanText, Loader2, Copy, Check } from "lucide-react";
+import { apiExtractText } from "@/lib/api";
 
 interface OcrResultProps {
     file: File | null;
@@ -17,12 +18,16 @@ export function OcrResult({ file }: OcrResultProps) {
     const handleExtract = async () => {
         if (!file) return;
         setIsLoading(true);
-        // Mock OCR — will be replaced by real API call to Spring Boot backend
-        await new Promise((r) => setTimeout(r, 1500));
-        setText(
-            `[Mock OCR Result]\n\nExtracted text from "${file.name}" would appear here.\n\nThis is a placeholder — connect to your Spring Boot OCR endpoint to get real results.`
-        );
-        setIsLoading(false);
+
+        try {
+            const result = await apiExtractText(file);
+            setText(result.text);
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "OCR extraction failed";
+            setText(`Error: ${message}`);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleCopy = async () => {
