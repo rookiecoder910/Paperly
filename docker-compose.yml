@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - OCR_SERVICE_URL=http://ocr-service:5001
+      - HANDWRITING_SERVICE_URL=http://handwriting-service:5002
+    depends_on:
+      - ocr-service
+      - handwriting-service
+    restart: unless-stopped
+
+  ocr-service:
+    build: ./ocr-service
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+
+  handwriting-service:
+    build: ./handwriting-service
+    ports:
+      - "5002:5002"
+    restart: unless-stopped

@@ -7,6 +7,7 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
+	"net/textproto"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rookiecoder910/paperly-backend/config"
@@ -48,7 +49,16 @@ func (h *OCRHandler) ExtractText(c *gin.Context) {
 	var buf bytes.Buffer
 	writer := multipart.NewWriter(&buf)
 
-	part, err := writer.CreateFormFile("image", header.Filename)
+	// Use CreatePart (not CreateFormFile) to preserve the original content type
+	partHeader := make(textproto.MIMEHeader)
+	partHeader.Set("Content-Disposition", fmt.Sprintf(`form-data; name="image"; filename="%s"`, header.Filename))
+	contentType := header.Header.Get("Content-Type")
+	if contentType == "" {
+		contentType = "application/octet-stream"
+	}
+	partHeader.Set("Content-Type", contentType)
+
+	part, err := writer.CreatePart(partHeader)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to prepare OCR request"})
 		return
