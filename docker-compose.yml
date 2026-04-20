@@ -4,9 +4,9 @@ services:
   backend:
     build: ./backend
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
-      - PORT=8080
+      - PORT=8081
       - OCR_SERVICE_URL=http://ocr-service:5001
       - HANDWRITING_SERVICE_URL=http://handwriting-service:5002
     depends_on:
