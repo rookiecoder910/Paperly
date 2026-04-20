@@ -9,6 +9,7 @@ services:
       - PORT=8081
       - OCR_SERVICE_URL=http://ocr-service:5001
       - HANDWRITING_SERVICE_URL=http://handwriting-service:5002
+      - FRONTEND_URL=https://frontend-ten-iota-59.vercel.app
     depends_on:
       - ocr-service
       - handwriting-service
